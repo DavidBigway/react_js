@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import Message from './components/Message'
+
+const posts = [
+  {
+    title: 'Post 1',
+    text: 'Ut enim ad minima veniam, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, sunt in culpa...',
+  },
+  {
+    title: 'Post 2',
+    text: 'Nemo enim ipsam voluptatem, consectetur adipiscing elit, sunt in culpa qui officia deserunt mollit anim id est laborum? Sed ut...',
+  },
+]
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={styles.flex}>
+      {posts.map((post, i) => {
+        return (
+          <Message title={post.title} key={i + Math.random()}>
+            {post.text}
+          </Message>
+        )
+      })}
     </div>
-  );
+  )
 }
 
-export default App;
+const styles = {
+  flex: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    padding: '15px',
+  },
+}
+
+export default App
