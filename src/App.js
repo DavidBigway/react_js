@@ -9,6 +9,10 @@ const posts = [
     title: 'Post 2',
     text: 'Nemo enim ipsam voluptatem, consectetur adipiscing elit, sunt in culpa qui officia deserunt mollit anim id est laborum? Sed ut...',
   },
+  {
+    title: 'Post 3',
+    text: 'Added for pull request',
+  },
 ]
 
 function App() {
