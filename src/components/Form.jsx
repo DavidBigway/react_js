@@ -5,7 +5,7 @@ import InputMessage from './ui/Input/InputMessage'
 import Button from './ui/Button/Button'
 import { AUTORS } from '../assets/consts/users'
 
-function Form({ handlerMessageList }) {
+function Form({ handlerMessageList, chatId }) {
   const [inputValue, setInputValue] = useState('')
   const handlerSubmit = (e) => {
     e.preventDefault()
@@ -26,7 +26,7 @@ function Form({ handlerMessageList }) {
         handlerInputValue={handlerInputValue}
         inputValue={inputValue}
       />
-      <Button inputValue={inputValue} />
+      <Button inputValue={inputValue} icon />
     </form>
   )
 }
