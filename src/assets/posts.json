@@ -1,0 +1,17 @@
+[
+  {
+    "title": "Post 1",
+    "message": "Ut enim ad minima veniam, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, sunt in culpa...",
+    "autor": "Autor 1"
+  },
+  {
+    "title": "Post 2",
+    "message": "Nemo enim ipsam voluptatem, consectetur adipiscing elit, sunt in culpa qui officia deserunt mollit anim id est laborum? Sed ut...",
+    "autor": "Autor 2"
+  },
+  {
+    "title": "Post 3",
+    "message": "Added for pull request",
+    "autor": "Autor 3"
+  }
+]
