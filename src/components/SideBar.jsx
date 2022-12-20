@@ -1,17 +1,14 @@
-import React, { useState } from 'react'
-import { nanoid } from 'nanoid'
+import React from 'react'
 import AddChat from './Chat/AddChat'
 import { NavLink } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
-function SideBar({ onChatSelect }) {
-  const [chats, setChats] = useState([{ id: nanoid(), name: 'bot' }])
-  const handlerAddChat = (e) => {
-    setChats([...chats, e])
-  }
+function SideBar() {
+  const chats = useSelector((store) => store.chat)
 
   return (
     <div style={styles.sidebar}>
-      <AddChat handlerAddChat={handlerAddChat} />
+      <AddChat />
       <ul>
         {chats.map((el) => {
           return (
@@ -31,9 +28,8 @@ function SideBar({ onChatSelect }) {
                   flexGrow: 1,
                   padding: '6px 12px',
                 })}
-                onClick={() => onChatSelect(el)}
               >
-                {el.name}
+                {el.chatName}
               </NavLink>
             </li>
           )

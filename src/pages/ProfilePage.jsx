@@ -7,8 +7,8 @@ import styles from '../assets/css/app.module.css'
 function ProfilePage() {
   const [name, setName] = useState('')
   const dispatch = useDispatch()
-  const visible = useSelector((store) => store.visible)
-  const titleName = useSelector((store) => store.name)
+  const visible = useSelector((store) => store.profile.visible)
+  const titleName = useSelector((store) => store.profile.name)
 
   const handlerCheckbox = (e) => {
     dispatch(contentToggle(e.target.checked))

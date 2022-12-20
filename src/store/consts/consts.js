@@ -1,2 +1,4 @@
 export const CHANGE_NAME = 'CHANGE_NAME'
 export const CONTENT_TOGGLE = 'CONTENT_TOGGLE'
+export const ADD_NEW_CHAT = 'ADD_NEW_CHAT'
+export const ADD_NEW_MESSAGE = 'ADD_NEW_MESSAGE'
