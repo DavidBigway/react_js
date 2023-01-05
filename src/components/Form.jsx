@@ -4,19 +4,17 @@ import styles from '../assets/css/app.module.css'
 import InputMessage from './ui/Input/InputMessage'
 import Button from './ui/Button/Button'
 import { AUTORS } from '../assets/consts/users'
+import { nanoid } from 'nanoid'
 
-function Form({ handlerMessageList, chatId }) {
+function Form({ handlerMessageList }) {
   const [inputValue, setInputValue] = useState('')
   const handlerSubmit = (e) => {
     e.preventDefault()
-    handlerMessageList({ text: inputValue, autor: AUTORS.user })
-    reset()
+    handlerMessageList({ id: nanoid(), text: inputValue, autor: AUTORS.user })
+    setInputValue('')
   }
   const handlerInputValue = (e) => {
     setInputValue(e)
-  }
-  const reset = () => {
-    setInputValue('')
   }
 
   return (

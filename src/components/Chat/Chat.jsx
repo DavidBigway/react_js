@@ -1,62 +1,69 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Form from '../Form'
 import styles from './chat.module.css'
 import { AUTORS } from '../../assets/consts/users'
+import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { addNewMessageThunk } from '../../store/actions/chatActions'
+import { nanoid } from 'nanoid'
 
 const botMSG = 'Привет! Я бот.'
 
-function Chat({ chatId, chatBot }) {
-  const [messageList, setMessageList] = useState([
-    { [chatId]: [{ text: '', autor: '' }] },
-  ])
-  const filtredChat = messageList.filter(
-    (message) => Object.keys(message)[0] === chatId
-  )
-
+function Chat() {
+  const { id } = useParams()
+  const chats = useSelector((state) => state.chat)
+  const dispatch = useDispatch()
+  const filteredChat = chats.filter((chat) => chat.id === id)
   const handlerMessageList = useCallback(
     (e) => {
-      setMessageList([...messageList, { [chatId]: e }])
+      dispatch(addNewMessageThunk({ chatId: id, chatHistory: e }))
     },
-    [chatId, messageList]
+    [dispatch, id]
   )
 
   useEffect(() => {
-    if (chatBot === 'bot') {
+    if (filteredChat[0].chatName === 'bot') {
       const tOut = setTimeout(() => {
-        handlerMessageList({ text: botMSG, autor: AUTORS.bot })
+        handlerMessageList({
+          id: nanoid(),
+          text: botMSG,
+          autor: AUTORS.bot,
+        })
       }, 1500)
       if (
-        filtredChat.length > 0 &&
-        filtredChat[filtredChat.length - 1][chatId].autor === 'bot'
+        filteredChat[0].chatHistory.length > 0 &&
+        filteredChat[0].chatHistory[filteredChat[0].chatHistory.length - 1]
+          .autor === 'bot'
       ) {
         clearTimeout(tOut)
       }
     }
-  }, [chatBot, chatId, filtredChat, handlerMessageList])
+  }, [filteredChat, handlerMessageList])
+
   return (
     <div className={styles.content}>
       <div className={styles.messages}>
-        {filtredChat.map((message, idx) => {
+        {filteredChat[0].chatHistory.map((message) => {
           return (
-            message[chatId].text && (
+            message.text && (
               <div
-                key={`${chatId}_${idx}`}
+                key={`${message.id}`}
                 className={styles.message}
                 style={
-                  message[chatId].autor !== 'bot'
+                  message.autor !== 'bot'
                     ? { backgroundColor: '#a9d9ff', alignSelf: 'flex-end' }
                     : { alignSelf: 'flex-start' }
                 }
               >
-                <span>{message[chatId].autor}</span>
-                <div>{message[chatId].text}</div>
+                <span>{message.autor}</span>
+                <div>{message.text}</div>
               </div>
             )
           )
         })}
       </div>
-      <Form handlerMessageList={handlerMessageList} chatId={chatId} />
+      <Form handlerMessageList={handlerMessageList} />
     </div>
   )
 }

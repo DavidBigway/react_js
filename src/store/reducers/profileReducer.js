@@ -5,7 +5,7 @@ const initialState = {
   visible: true,
 }
 
-export const profileReduser = (state = initialState, action) => {
+export const profileReducer = (state = initialState, action) => {
   const { type, payload } = action
   switch (type) {
     case types.CHANGE_NAME:

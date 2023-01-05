@@ -2,19 +2,19 @@ import React, { useState } from 'react'
 import { nanoid } from 'nanoid'
 import Button from '../ui/Button/Button'
 import styles from './chat.module.css'
+import { useDispatch } from 'react-redux'
+import { addNewChatThunk } from '../../store/actions/chatActions'
 
-function AddChat({ handlerAddChat }) {
+function AddChat() {
   const [chatName, setChatName] = useState('')
+  const dispatch = useDispatch()
   const onSubmit = (e) => {
     e.preventDefault()
-    handlerAddChat({ id: nanoid(), name: chatName })
-    reset()
+    dispatch(addNewChatThunk({ id: nanoid(), chatName, chatHistory: [] }))
+    setChatName('')
   }
   const handlerOnChange = (e) => {
     setChatName(e.target.value)
-  }
-  const reset = () => {
-    setChatName('')
   }
   return (
     <form onSubmit={onSubmit} className={styles['add-chat']}>
@@ -25,5 +25,10 @@ function AddChat({ handlerAddChat }) {
     </form>
   )
 }
+
+/* 
+dispatch(addNewChat({id: nanoid(), chatName, chatHistory: []}))
+
+*/
 
 export default AddChat
