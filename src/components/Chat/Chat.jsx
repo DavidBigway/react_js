@@ -5,7 +5,7 @@ import styles from './chat.module.css'
 import { AUTORS } from '../../assets/consts/users'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { addNewMessage } from '../../store/actions/chatActions'
+import { addNewMessageThunk } from '../../store/actions/chatActions'
 import { nanoid } from 'nanoid'
 
 const botMSG = 'Привет! Я бот.'
@@ -17,7 +17,7 @@ function Chat() {
   const filteredChat = chats.filter((chat) => chat.id === id)
   const handlerMessageList = useCallback(
     (e) => {
-      dispatch(addNewMessage({ chatId: id, chatHistory: e }))
+      dispatch(addNewMessageThunk({ chatId: id, chatHistory: e }))
     },
     [dispatch, id]
   )

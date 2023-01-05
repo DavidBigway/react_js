@@ -3,14 +3,14 @@ import { nanoid } from 'nanoid'
 import Button from '../ui/Button/Button'
 import styles from './chat.module.css'
 import { useDispatch } from 'react-redux'
-import { addNewChat } from '../../store/actions/chatActions'
+import { addNewChatThunk } from '../../store/actions/chatActions'
 
 function AddChat() {
   const [chatName, setChatName] = useState('')
   const dispatch = useDispatch()
   const onSubmit = (e) => {
     e.preventDefault()
-    dispatch(addNewChat({ id: nanoid(), chatName, chatHistory: [] }))
+    dispatch(addNewChatThunk({ id: nanoid(), chatName, chatHistory: [] }))
     setChatName('')
   }
   const handlerOnChange = (e) => {
