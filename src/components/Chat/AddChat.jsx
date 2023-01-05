@@ -26,9 +26,4 @@ function AddChat() {
   )
 }
 
-/* 
-dispatch(addNewChat({id: nanoid(), chatName, chatHistory: []}))
-
-*/
-
 export default AddChat
